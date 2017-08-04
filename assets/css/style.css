@@ -1,0 +1,17 @@
+.character{
+	position: relative;
+	display: inline-block;
+	vertical-align: bottom;
+	margin-left: 10px;
+	padding: 0px;
+	border-bottom: 5px solid black;
+	width: 30px;
+	height: 28px;
+	text-align: center;
+	font-size: 20px
+
+}
+
+.row{
+	font-size: 0px;
+}
