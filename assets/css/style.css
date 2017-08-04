@@ -12,6 +12,10 @@
 
 }
 
-.row{
+.guessed{
+	font-size: 28px;
+}
+
+.container{
 	font-size: 0px;
 }
