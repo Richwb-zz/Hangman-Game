@@ -6,16 +6,11 @@
 	padding: 0px;
 	border-bottom: 5px solid black;
 	width: 30px;
-	height: 28px;
+	height: 45px;
 	text-align: center;
-	font-size: 20px
-
-}
-
-.guessed{
 	font-size: 28px;
 }
 
-.container{
-	font-size: 0px;
+.font{
+	font-size: 28px;
 }
