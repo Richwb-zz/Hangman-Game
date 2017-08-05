@@ -1,16 +1,42 @@
-// List of words
-var wordList = ["stingray","crocodile","crikey","beautiful","terri","hunter","snake","shela","australia","venomous","poisonous","bite","sting", "gooday","size", "strike"];
+// Creates object with 
+function Gameinfo(wordList, guesses) {
+	this.wordList = wordList;
+	this.word = "";
+	this.characters = 0;
+	this.Win = 0;
+	this.Loose = 0;
+	this.guessedLetters = "";
+	this.guessesLeft = 5;
+	this.guessedKey = "";
+};
 
-// randomly selected word from the array to be guessed
-var guessWord = (wordList[Math.floor(Math.random() * wordList.length)]);
+
+// // 
+//  function startgame(){
+
+var Game = new Gameinfo(
+	["stingray","crocodile","crikey","beautiful","terri","hunter","snake","shela","australia","venomous","poisonous","bite","sting", "gooday","size", "strike"],
+	5
+);
+
+document.querySelector(".remaining").textContent = 5;
+
+Game.word = Game.wordList[Math.floor(Math.random() * Game.wordList.length)];
+Game.characters = Game.word.length;
+
+// // 	return
+//  }
+
+//  // calls the start game function
+// startgame();
 
 // string variable of guessed letters, displayed in html
 var guessed = document.querySelector(".guessed");
-guessed.textContent = "";
+guessed.textContent = Game.guessedLetters;
 
-// tracks how many wrong gueses left
+// tracks how many wrong guesses left
 var guessesRemaining = document.querySelector(".remaining");
-guessesRemaining.textContent = 5;
+guessesRemaining.textContent = Game.guessesLeft;
 
 // Flag to check if letter is already in the guessed list
 var guessesFlag = 0;
@@ -18,52 +44,54 @@ var guessesFlag = 0;
 // Flag to verify if character exists in word
 var charExists = 0;
 
-
-console.log(guessWord);
+console.log(Game.word);
 
 document.onkeyup=function(guess){
 
-	guessKey = guess.key.toLowerCase();
+	Game.guessedKey = guess.key.toLowerCase();
 
-
-	console.log(guessKey);
 
 	// checks if key pressed is a letter
 	if(guess.keyCode > 64 && guess.keyCode < 91){
 
 		// loop through word to see if the letter guess is in the word and gets position and adds it to correct position in game or lowers guesses remaining
-		for (var i = 0; i < guessWord.length; i++) {
+		for (var i = 0; i < Game.characters; i++) {
 			
-			// if letter is in the word displays the letter in the correct position in the game
-			if(guessWord[i] === guessKey){
-				document.querySelectorAll(".character")[i].textContent = guessWord[i];
-				charExists = 1;
+			// if letter is in the word display the letter in the correct position in the game
+			if(Game.word[i] == Game.guessedKey){
+				
+				document.querySelectorAll(".character")[i].textContent = Game.word[i];
+				guessesFlag = 1;
+
 			}
 		}
 
-		console.log(charExists);
-
-		if(charExists == 0){
-			guessesRemaining.textContent = guessesRemaining.textContent - 1;
+		if(guessesFlag == 0){
+			Game.guessesLeft--;
 		}else{
-			charExists = 0;
+			guessesFlag = 0;
 		}
 
+		guessesRemaining.textContent = Game.guessesLeft;
 
-		// Checks to see if the letter guess is in the gussed list. if found switches the flag to 1
-		
-		for (var j = 0; j < guessed.textContent.length; j++) {
-			if(guessed.textContent[j] == guessKey){
-				guessesFlag = 1;
+		// Checks to see if the letter guess is in the guessed list. if found switches the flag to 1
+		for (var i = 0; i < Game.guessedLetters.length; i++) {
+
+			if(Game.guessedLetters[i] == Game.guessedKey){
+				charExists = 1
 				break;
 			}
 		}
 
-		// if flag is 0 adds letter to list otherwise resets for next guess
-		if(guessesFlag == 0){
-			guessed.textContent = guessed.textContent + " " + guessKey;
+		if(charExists == 0){
+			Game.guessedLetters = Game.guessedLetters + Game.guessedKey + " ";
 		}else{
-			guessesFlag = 0;
+			charExists = 0;
 		}
+
+		guessed.textContent = Game.guessedLetters;
+
+	}else{
+		alert("Invalid key pressed");
 	}
 }
