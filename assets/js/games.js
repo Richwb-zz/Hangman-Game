@@ -1,6 +1,11 @@
 // string variable of guessed letters, displayed in html
 var guessed = document.querySelector(".guessed");
 var guessesRemaining = document.querySelector(".remaining");
+var win = new Audio('assets/audio/crikey.wav');
+var lose = new Audio('assets/audio/no_worries.wav');
+var start = new Audio('assets/audio/have_a_go.wav');
+var leave = new Audio('assets/audio/see_ya_later.wav');
+var guess = new Audio('assets/audio/look_at_that.wav');
 
 // Flag to verify if character exists in word
 var letterExists = 0;
@@ -20,6 +25,8 @@ function Gameinfo(wordList, guesses) {
 
 // Start game by assigning values and creating divs
 function startgame(){
+
+	start.play();
 
 	// Removes div children, created by previousgame, within div containing the gameboard class 
 	var removeDivs = document.querySelector(".gameboard");
@@ -61,8 +68,10 @@ function endGame(endStatement){
 	//Display if win or lose and increase win or lose counter;
 	if(endStatement == "Win"){
 		alert("You Win!!!");
+		win.play();
 		document.querySelector(".wins").textContent = ++Game.Win;
 	}else if(endStatement == "Lose"){
+		lose.play('assets/audio/no_worries.wav');
 		alert("Game Over!");
 		document.querySelector(".losses").textContent = ++Game.Lose;
 	}
@@ -70,6 +79,8 @@ function endGame(endStatement){
 	//ask if player wants to play again
 	if(confirm("Play again?")){
 		startgame();
+	}else{
+		leave.play();
 	}
 }
 
@@ -103,6 +114,8 @@ document.onkeyup = function(guessedKey){
 			// if letter is in the word and was not already guessed display the letter in the correct position in the game
 			if(Game.word[i] == Game.guessedKey && Game.guessedLetters.indexOf(Game.guessedKey) == -1){
 				
+				guess.play();
+
 				document.querySelectorAll(".character")[i].textContent = Game.word[i];
 				// ---------------  REMOVE ONCE GAME IS COMPLETE
 				console.log(Game.lettersLeft);

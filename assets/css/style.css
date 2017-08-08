@@ -1,3 +1,8 @@
+body{
+	background: url("../images/background.jpg") center center fixed;
+	background-size: cover;
+}
+
 .character{
 	position: relative;
 	display: inline-block;
