@@ -68,11 +68,11 @@ function endGame(endStatement){
 	if(endStatement == "Win"){
 		alert("You Win!!!");
 		win.play();
-		$(".wins").text = ++Game.Win;
+		$(".wins").text(++Game.Win);
 	}else if(endStatement == "Lose"){
 		lose.play('assets/audio/no_worries.wav');
 		alert("Game Over!");
-		$(".losses").text = ++Game.Lose;
+		$(".losses").text(++Game.Lose);
 	}
 	
 	//ask if player wants to play again
