@@ -36,7 +36,8 @@ function startgame(){
 
 	// Removes div children, created by previousgame, within div containing the gameboard class 
 	$(".character").remove();
-
+	
+	$(".body").css("visibility", "hidden");
 	// Randomly sets the game word from the array
 	Game.word = Game.wordList[Math.floor(Math.random() * (Game.wordList.length -1))];
 	
@@ -123,10 +124,9 @@ $(document).keyup(function(guessedKey){
 		//if letter was not in word then lettersExists remains 0 and proccesses lose events
 		if(letterExists == 0){
 
-			//subtract gusses by 1 and update gusses left display
-			// $(".remaining").text(--Game.guessesLeft);
+			//subtract guesses by 1 and update gusses left display
 
-			$(".body").eq(--Game.guessesLeft).css("visibility", "visible")
+			$(".body").eq(--Game.guessesLeft).css("visibility", "visible");
 			
 			//if gusses left = 0 then call endGame function with lose status and end game
 			if(Game.guessesLeft == 0){
